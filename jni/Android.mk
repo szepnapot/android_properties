@@ -24,6 +24,4 @@ LOCAL_SRC_FILES := system_properties.cpp
 
 LOCAL_LDLIBS +=-L$(SYSROOT)/usr/lib -llog
 
-include $(BUILD_EXECUTABLE)
-
-
+include $(BUILD_SHARED_LIBRARY)
