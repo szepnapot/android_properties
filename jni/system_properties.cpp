@@ -35,14 +35,12 @@
 
 #define PROPERTIES_FILE  "/dev/__properties__"
 
-/** 属性前缀 */
 typedef struct prefix_node {
     char name[PROP_NAME_MAX];
     struct context_node *context;
     struct prefix_node *next;
 } prefix_node;
 
-/** 属性对应的security context */
 typedef struct context_node {
     char name[PROP_VALUE_MAX];
     void *mem;
@@ -59,7 +57,6 @@ typedef struct prop_bt {
     char name[0];
 } prop_bt;
 
-/** 保存属性 key value */
 typedef struct prop_info {
     uint32_t serial;
     char value[PROP_VALUE_MAX];
@@ -75,7 +72,7 @@ typedef struct prop_area {
     char data[0];
 } prop_area;
 
-int g_log_type = LOG_TYPE_CONSOLE + LOG_TYPE_LOGCAT; // 默认输出到logcat和console
+int g_log_type = LOG_TYPE_CONSOLE + LOG_TYPE_LOGCAT;
 bool g_need_security_context = false;
 char *g_current_security_context = NULL;
 
@@ -372,11 +369,6 @@ int get_sdk_version() {
     return sdk_version;
 }
 
-/** 
- * 打印所有属性
- *  Android N之间所有属性是在/dev/__properties__文件中
- *  Android N上，每个security context对应一个文件，security context和属性前缀对应关系保存在/property_contexts文件中
- */
 void dump_all() {
     if (get_sdk_version() < ANDROID_N) {
         dump_properties_from_file(PROPERTIES_FILE);
